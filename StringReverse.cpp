@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 
 template <typename T, typename size_t N>
@@ -44,6 +45,11 @@ int main()
 			std::begin(test),
 			std::end(test),
 			std::ostream_iterator<int>(std::cout, "\n"));
+	}
+	{
+		std::string test = "rab oof";
+		std::ranges::reverse(test.begin(), test.end());
+		puts(test.c_str());
 	}
 
 

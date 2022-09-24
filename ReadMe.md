@@ -2,6 +2,7 @@
 
 - Just implemented some basic data structures out of fun
 	- Mostly to see where they so difficult to do as they felt when I started programming ages ago
+- Also some stupid "interview" questions implemented in an overkill way
 
 ## Prerequisites
 
