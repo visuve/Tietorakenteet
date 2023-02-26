@@ -51,13 +51,13 @@ private:
 template<size_t N>
 to_string_t<N> to_string;
 
-template <size_t X> concept IsFizz = X % 3 == 0;
-template <size_t X> concept IsBuzz = X % 5 == 0;
+template <size_t X> concept is_fizz = X % 3 == 0;
+template <size_t X> concept is_buzz = X % 5 == 0;
 
 template <size_t N>
-class FizzBuzz {
+class fizz_buzz {
 public:
-	constexpr FizzBuzz()
+	constexpr fizz_buzz()
 	{
 		fill<N>();
 	}
@@ -84,25 +84,25 @@ private:
 	{
 	};
 
-	template<size_t X> requires (IsFizz<X>&& IsBuzz<X>)
-	constexpr const char* value() 
-	{
-		return "FizzBuzz";
-	}
-	
-	template<size_t X> requires IsFizz<X>
+	template<size_t X> requires is_fizz<X>
 	constexpr const char* value()
 	{
 		return "Fizz";
 	}
 
-	template<size_t X> requires IsBuzz<X>
+	template<size_t X> requires is_buzz<X>
 	constexpr const char* value()
 	{
 		return "Buzz";
 	}
 
-	template<size_t X> requires (!IsFizz<X> && !IsBuzz<X>)
+	template<size_t X> requires (is_fizz<X>&& is_buzz<X>)
+		constexpr const char* value()
+	{
+		return "FizzBuzz";
+	}
+
+	template<size_t X> requires (!is_fizz<X> && !is_buzz<X>)
 	constexpr const char* value()
 	{
 		return to_string<X>;
@@ -113,9 +113,9 @@ private:
 
 int main()
 {
-	constexpr auto fizzBuzz = FizzBuzz<50>();
+	constexpr fizz_buzz<50> fb;
 
-	for (const char* x : fizzBuzz) 
+	for (const char* x : fb)
 	{
 		puts(x);
 	}
